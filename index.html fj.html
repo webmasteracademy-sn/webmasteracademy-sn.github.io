@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebMaster Academy</title>
+<meta name="description" content="Cours de 2ᵉ année DT Informatique et Webmaster : 12 matières, chapitres, exercices corrigés et quiz.">
+<meta name="theme-color" content="#0D0B1E">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTJDMkI1IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTE0IDh2Nk0yNCA4djZNMzQgOHY2TTQ0IDh2Nk01MCAxNGg2TTUwIDI0aDZNNTAgMzRoNk01MCA0NGg2TTggMjBoNk04IDMwaDZNOCA0MGg2TTggNTBoNk0yMCA1MHY2TTMwIDUwdjZNNDAgNTB2NiIvPjwvZz48cmVjdCB4PSIxNCIgeT0iMTQiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgcng9IjgiIGZpbGw9IiMxNzEzMkYiIHN0cm9rZT0iI0U2MDA3RSIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTIwIDI0bDUgMTcgNy0xMiA3IDEyIDUtMTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y0QjQwMCIgc3Ryb2tlLXdpZHRoPSI0LjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* « Nuit de Thiès » : indigo profond, magenta hibiscus, bleu lagon, or du Sahel ; pages de lecture lavande très claire.
+     Accueil plein écran en 3D, puis colonne de lecture avec rail de chapitres. */
+  --night:#0D0B1E; --night2:#17132F; --hibiscus:#E6007E; --lagon:#12C2B5; --sahel:#F4B400;
+  --paper:#F6F4FB; --surface:#FFFFFF; --ink:#17132B; --muted:#625D78; --line:#E1DCEE;
+  --display:"Syne", "Segoe UI", system-ui, sans-serif;
+  --body:"Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--hibiscus)}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sahel);outline-offset:2px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);line-height:1.04;text-wrap:balance;margin:0;letter-spacing:-.015em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.boot{padding:40px;text-align:center;color:var(--muted)}
+.mono{font-family:var(--mono)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:700;text-decoration:none;color:var(--ink);cursor:pointer;line-height:1.2}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--hibiscus);border-color:var(--hibiscus);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.btn.ghost:hover{border-color:#fff}
+.btn.ok{background:#0E9C77;border-color:#0E9C77;color:#fff}
+.btn.small{padding:8px 13px;font-size:15px;border-radius:10px}
+
+/* en-tête sombre */
+.top{background:rgba(13,11,30,.92);backdrop-filter:blur(10px);position:sticky;top:0;z-index:30;border-bottom:1px solid rgba(255,255,255,.08)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.brand img{width:34px;height:34px}
+.brand b{font-family:var(--display);font-weight:800;font-size:19px;line-height:1}
+.brand b span{color:var(--sahel)}
+.nav{margin-left:auto;display:flex;gap:6px}
+.nav .btn{background:transparent;color:#cfc9e6;border-color:transparent}
+.nav .btn:hover{color:#fff;border-color:rgba(255,255,255,.25)}
+.nav .btn.cur{color:#fff;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18)}
+@media (max-width:560px){.hide-sm{display:none!important}.nav .btn{padding:7px 9px;font-size:14px;white-space:nowrap}.brand b{font-size:16px}}
+
+/* séquence de démarrage façon BIOS */
+#post{position:fixed;inset:0;z-index:100;background:#05040D;color:#9FF3E9;font-family:var(--mono);font-size:14px;padding:28px 22px;line-height:1.7;transition:opacity .5s}
+#post .ok{color:var(--sahel)}
+#post .skip{position:absolute;right:16px;bottom:16px;background:none;border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:8px 12px;cursor:pointer}
+#post.out{opacity:0;pointer-events:none}
+
+/* accueil 3D */
+.hero3d{position:relative;background:radial-gradient(90% 70% at 50% 35%,#251c52 0%,var(--night) 62%);color:#fff;overflow:hidden}
+.hero3d .scene{position:relative;height:clamp(460px,74vh,720px)}
+.hero3d canvas{width:100%!important;height:100%!important;display:block;touch-action:pan-y}
+.hero3d .nogl{position:absolute;inset:0;display:grid;place-items:center}
+.hero3d .nogl img{width:min(42%,260px)}
+.hero3d .cap{position:absolute;left:50%;transform:translateX(-50%);top:16px;font-family:var(--mono);font-size:12.5px;color:#d9d3f2;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:6px 12px;border-radius:999px;white-space:nowrap;pointer-events:none}
+.hero3d .copy{position:relative;margin-top:-140px;padding-bottom:40px;pointer-events:none}
+.hero3d .copy>*{pointer-events:auto}
+.hero3d .copy::before{content:"";position:absolute;inset:-60px -40vw 0;background:linear-gradient(180deg,rgba(13,11,30,0) 0%,var(--night) 46%);z-index:-1}
+.kicker{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--lagon);font-weight:600}
+.hero3d h1{font-size:clamp(42px,7.4vw,92px);font-weight:800;margin:10px 0 14px;max-width:12em}
+.hero3d h1 .g{background:linear-gradient(90deg,var(--hibiscus),var(--sahel));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero3d .lead{color:#cfc9e6;font-size:19px;max-width:34em;margin:0 0 22px}
+.facts{display:flex;flex-wrap:wrap;gap:26px;margin-top:28px}
+.facts div{font-size:14.5px;color:#a9a2c7}
+.facts b{display:block;font-family:var(--display);font-size:36px;color:#fff;font-variant-numeric:tabular-nums;line-height:1.1}
+
+.todaybox{background:var(--night2);color:#fff;border-radius:16px;padding:16px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:26px 0 0;border:1px solid rgba(255,255,255,.08)}
+.todaybox .d{font-family:var(--display);font-size:22px;font-weight:800;margin-right:6px}
+.todaybox a{background:rgba(255,255,255,.08);color:#fff;text-decoration:none;border-radius:10px;padding:8px 12px;font-weight:600;font-size:15px;border-left:3px solid var(--c,var(--lagon))}
+.todaybox a small{font-family:var(--mono);opacity:.7;margin-left:6px}
+
+section.band{padding:60px 0}
+section.band.white{background:var(--surface)}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sh h2{font-size:clamp(32px,4.4vw,48px);font-weight:800}
+.sh p{color:var(--muted);margin:6px 0 0;max-width:40em}
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 12px;min-width:min(380px,100%)}
+.search input{flex:1;border:0;outline:none;background:none;padding:12px 0}
+.results{display:grid;gap:8px;margin-bottom:14px}
+.results a{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);text-decoration:none}
+.results small{color:var(--muted);font-family:var(--mono)}
+
+/* grille des matières */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.mcard{position:relative;display:flex;flex-direction:column;gap:10px;padding:20px 20px 18px;border-radius:18px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--ink);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.mcard:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px color-mix(in srgb,var(--c) 70%,transparent)}
+.mcard .num{position:absolute;right:16px;top:12px;font-family:var(--display);font-weight:800;font-size:46px;line-height:1;color:color-mix(in srgb,var(--c) 22%,#fff)}
+.mcard .day{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.mcard h3{font-size:24px;font-weight:800;max-width:80%}
+.mcard p{margin:0;font-size:15px;color:var(--muted);line-height:1.5}
+.mcard .foot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:auto}
+.bar{height:6px;background:color-mix(in srgb,var(--c) 14%,#fff);border-radius:4px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--c)}
+.mcard::after{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c)}
+
+.price{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:820px){.price{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
+.big{font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+footer{background:var(--night);color:#a9a2c7;padding:26px 0;font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+/* emploi du temps */
+.sub{color:var(--muted);margin:0 0 22px;max-width:46em}
+.sched{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.sched table{border-collapse:collapse;width:100%;min-width:760px}
+.sched th,.sched td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+.sched th{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:#FAF9FD}
+.sched th.now{color:var(--hibiscus)}
+.sched td.h{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+.slot{display:block;padding:9px 11px;border-radius:10px;background:color-mix(in srgb,var(--c) 15%,#fff);border-left:4px solid var(--c);color:var(--ink);text-decoration:none;font-weight:700;font-size:14.5px;line-height:1.25}
+
+/* page matière */
+.shead{background:var(--night);color:#fff;position:relative;overflow:hidden}
+.shead::before{content:"";position:absolute;right:-120px;top:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c) 55%,transparent) 0%,transparent 65%)}
+.shead .wrap{position:relative;padding-top:30px;padding-bottom:30px}
+.back{font-family:var(--mono);font-size:13px;color:#cfc9e6;text-decoration:none}
+.shead h1{font-size:clamp(38px,6.4vw,66px);font-weight:800;margin:10px 0 8px}
+.shead .intro{color:#cfc9e6;margin:0;max-width:44em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font-weight:600;font-size:14.5px}
+.chip i{width:9px;height:9px;border-radius:50%}
+.role{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:14px;margin:26px 0 8px}
+@media (max-width:900px){.role{grid-template-columns:1fr}}
+.role>div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.role h3{font-size:18px;margin-bottom:8px;color:var(--c)}
+.role p{margin:0;font-size:16px}
+.role ul{margin:0;padding-left:18px;font-size:15.5px}
+.role li{margin:3px 0}
+.course{display:grid;grid-template-columns:260px minmax(0,1fr);gap:30px;margin-top:26px}
+.course>*{min-width:0}
+@media (max-width:1100px){.course{grid-template-columns:minmax(0,1fr)}}
+.toc{display:flex;flex-direction:column;gap:4px;position:sticky;top:84px;align-self:start}
+@media (max-width:1100px){.toc{position:static;flex-direction:row;overflow-x:auto;padding-bottom:6px}}
+.toc button{display:flex;gap:10px;text-align:left;background:none;border:1px solid transparent;border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:600;font-size:15px;line-height:1.3;color:var(--muted);flex:none}
+@media (max-width:1100px){.toc button{max-width:220px;border-color:var(--line);background:var(--surface)}}
+.toc .n{font-family:var(--mono);font-size:12px;min-width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--line)}
+.toc button.on{color:var(--ink);background:var(--surface);border-color:var(--line)}
+.toc button.on .n{background:var(--c);border-color:var(--c);color:#fff}
+.toc button.done .n{background:#DDF6EE;border-color:#bfeadb;color:#0E9C77}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px 34px;max-width:840px}
+@media (max-width:600px){.doc{padding:22px 18px}}
+.kick{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.doc h2{font-size:clamp(28px,4vw,40px);font-weight:800;margin:6px 0 18px}
+.doc h3{font-size:22px;font-weight:700;margin:28px 0 8px}
+.doc p{margin:0 0 14px}
+.doc ul,.doc ol{margin:0 0 16px;padding-left:22px}
+.tbl{overflow-x:auto;margin:4px 0 18px;border:1px solid var(--line);border-radius:12px}
+.tbl table{border-collapse:collapse;width:100%;font-size:15.5px}
+.tbl th,.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.tbl th{background:#FAF9FD;font-weight:700}
+.tbl tr:last-child td{border-bottom:0}
+.formula{font-family:var(--mono);font-size:15.5px;background:color-mix(in srgb,var(--c) 8%,#fff);border:1px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:12px;padding:11px 14px;margin:0 0 16px;overflow-x:auto}
+.tip,.warn{border-radius:12px;padding:11px 14px;margin:0 0 16px;font-size:16px}
+.tip{background:#FFF7DB;border:1px solid #F3DF94}
+.warn{background:#FDEAF3;border:1px solid #F5BFD9}
+.tip b,.warn b{font-weight:800;margin-right:4px}
+pre{font-family:var(--mono);font-size:14px;line-height:1.55;background:var(--night);color:#E3DEF7;border-radius:12px;padding:14px 16px;overflow-x:auto;margin:0 0 16px}
+.exs{margin-top:30px;border-top:1px solid var(--line);padding-top:6px}
+.exi{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px}
+.exi .q{display:flex;gap:12px}
+.exi .q b{font-family:var(--mono);font-size:13px;color:var(--c);flex:none;padding-top:3px}
+.exi summary{cursor:pointer;margin-top:10px;font-weight:700;color:var(--hibiscus);font-size:15px;list-style:none;display:inline-block}
+.exi summary::-webkit-details-marker{display:none}
+.exi summary::before{content:"▸ "}
+.exi details[open] summary::before{content:"▾ "}
+.exi .a{margin-top:10px;padding:12px 14px;background:#F1FBF8;border-radius:10px;border:1px solid #CDEEE4}
+.pager{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:28px}
+.qi{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.qi p{font-weight:700;margin:0 0 10px}
+.opts{display:grid;gap:8px}
+.opts button{text-align:left;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#FBFAFE;cursor:pointer}
+.opts button:hover{border-color:var(--ink)}
+.opts .ok{border-color:#0E9C77;background:#E3F7F0}
+.opts .ko{border-color:var(--hibiscus);background:#FDEAF3}
+.expl{font-size:15px;color:var(--muted);margin-top:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* comptes, accès, administration */
+.btn.bad{color:#C62C5B;border-color:#F3C3D6}
+dialog{border:0;border-radius:20px;padding:0;width:min(440px,calc(100% - 24px));box-shadow:0 30px 80px rgba(13,11,30,.45);color:var(--ink);background:var(--surface)}
+dialog::backdrop{background:rgba(13,11,30,.6)}
+dialog .x{position:absolute;right:8px;top:6px}
+dialog .x button{background:none;border:0;font-size:20px;cursor:pointer;padding:6px 10px;color:var(--muted)}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;background:none;border:0;padding:18px 10px 14px;font-weight:800;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--hibiscus)}
+.form{display:flex;flex-direction:column;gap:6px;padding:18px 22px 24px}
+.form label{font-weight:700;font-size:15px;margin-top:8px}
+.form input{padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#FBFAFE;font-size:16px}
+.form input:focus{outline:none;border-color:var(--hibiscus);box-shadow:0 0 0 3px rgba(230,0,126,.15)}
+.form .btn{margin-top:14px}
+.fine{font-size:14px;color:var(--muted);margin:8px 0 0}
+.link{background:none;border:0;color:var(--hibiscus);cursor:pointer;padding:6px 0;font-weight:700;text-align:left}
+.msg{font-size:15px;margin:6px 0 0;min-height:1.2em}.msg.err{color:#C62C5B}.msg.okk{color:#0E9C77}
+.gate{max-width:640px;margin:48px auto;padding:0 20px}
+.gate .panel{padding:28px}
+.gate h1{font-size:clamp(30px,5vw,42px);font-weight:800;margin:10px 0 12px}
+.gate p,.gate li{color:var(--muted)}
+.gate .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.badge{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:600;padding:4px 9px;border-radius:6px;text-transform:uppercase;letter-spacing:.05em}
+.badge.pending{background:#FFF4CC;color:#7A5B00}.badge.approved{background:#DDF6EE;color:#0E9C77}.badge.blocked{background:#FDE4EF;color:#C62C5B}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:820px){.steps{grid-template-columns:1fr}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi b{display:block;font-family:var(--display);font-size:34px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:14px;color:var(--muted)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.seg{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface);flex-wrap:wrap}
+.seg button{background:none;border:0;padding:9px 13px;cursor:pointer;font-weight:700;font-size:14.5px}
+.seg button.on{background:var(--night);color:#fff}
+.ulist{display:grid;gap:10px}
+.urow{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.urow span{color:var(--muted);font-size:14.5px}
+.urow .acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+
+</style>
+</head>
+<body>
+<div id="app"><p class="boot">Chargement…</p></div>
+<dialog id="auth" aria-label="Connexion">
+  <form method="dialog" class="x"><button aria-label="Fermer">✕</button></form>
+  <div class="tabs" role="tablist"><button type="button" role="tab" id="tab-login" aria-selected="true">Se connecter</button><button type="button" role="tab" id="tab-register" aria-selected="false">Créer un compte</button></div>
+  <form id="f-login" class="form">
+    <label for="l-email">Adresse e-mail</label><input id="l-email" type="email" autocomplete="email" required>
+    <label for="l-pass">Mot de passe</label><input id="l-pass" type="password" autocomplete="current-password" required minlength="6">
+    <button class="btn primary" type="submit">Se connecter</button>
+    <button class="link" type="button" id="forgot">Mot de passe oublié ?</button>
+    <p class="msg" id="m-login" role="status"></p>
+  </form>
+  <form id="f-register" class="form" hidden>
+    <label for="r-nom">Prénom et nom</label><input id="r-nom" type="text" autocomplete="name" required minlength="3">
+    <label for="r-tel">Téléphone (WhatsApp)</label><input id="r-tel" type="tel" autocomplete="tel" required placeholder="77 000 00 00">
+    <label for="r-email">Adresse e-mail</label><input id="r-email" type="email" autocomplete="email" required>
+    <label for="r-pass">Mot de passe (8 caractères minimum)</label><input id="r-pass" type="password" autocomplete="new-password" required minlength="8">
+    <label for="r-pass2">Confirme le mot de passe</label><input id="r-pass2" type="password" autocomplete="new-password" required minlength="8">
+    <button class="btn primary" type="submit">Créer mon compte</button>
+    <p class="fine">Un e-mail de confirmation te sera envoyé. L'accès aux cours s'ouvre après paiement et validation.</p>
+    <p class="msg" id="m-register" role="status"></p>
+  </form>
+</dialog>
+<script>
+const SUBJECTS=[{"id":"electronique","nom":"Électronique","jour":"Lundi","heure":"8h – 10h","couleur":"#F2A93B","intro":"Les composants qui font vivre un ordinateur : résistances, condensateurs, diodes, transistors et portes logiques.","role":{"sert":"Comprendre ce qui se passe à l'intérieur de tous les appareils : ordinateur, téléphone, chargeur, box. C'est la base pour réparer une carte, fabriquer un montage ou programmer un objet connecté.","savoir":["Lire et calculer un circuit (loi d'Ohm, résistances)","Mesurer avec un multimètre","Reconnaître diodes, transistors et condensateurs","Programmer un Arduino avec des capteurs"],"metiers":["Technicien de maintenance électronique","Réparateur de téléphones et de cartes","Développeur d'objets connectés"]},"ch":["Les grandeurs de base","Les résistances","Condensateurs et bobines","Les diodes","Le transistor","Électronique numérique","Mesurer avec le multimètre et l'oscilloscope","Le microcontrôleur et Arduino","Capteurs et actionneurs"],"nbEx":21,"nbQuiz":9},{"id":"entreprenariat","nom":"Entreprenariat","jour":"Lundi","heure":"16h – 18h","couleur":"#3CC8B4","intro":"De l'idée à l'entreprise : étude de marché, business plan, création au Sénégal, financement et gestion.","role":{"sert":"Transformer tes compétences en revenus : créer ton atelier, ton agence web ou ton cyber, trouver des clients et gérer ton argent.","savoir":["Trouver et tester une idée","Faire une étude de marché et un business plan","Créer une entreprise au Sénégal","Fixer ses prix et calculer sa rentabilité"],"metiers":["Créateur d'entreprise","Freelance (sites web, maintenance)","Gestionnaire de projet"]},"ch":["L'entrepreneur et l'idée","L'étude de marché","Le business plan et le Business Model Canvas","Créer son entreprise au Sénégal","Financer son projet","Gestion et rentabilité","Le marketing digital","Présenter son projet : le pitch","Fixer son prix"],"nbEx":16,"nbQuiz":9},{"id":"maintenance","nom":"Maintenance","jour":"Mardi","heure":"10h – 12h","couleur":"#5B8CFF","intro":"L'ordinateur de l'intérieur : carte mère, processeur, mémoire, stockage, installation et dépannage.","role":{"sert":"Installer, réparer et entretenir les ordinateurs : le métier de base du technicien informatique, demandé par toutes les entreprises et tous les particuliers.","savoir":["Identifier chaque composant d'un PC","Monter et démonter un ordinateur","Installer Windows et les pilotes","Diagnostiquer une panne et protéger contre les virus"],"metiers":["Technicien de maintenance","Technicien support (helpdesk)","Gérant d'atelier de réparation"]},"ch":["Architecture d'un ordinateur","La carte mère","Processeur et mémoire RAM","Le stockage","Installer un système d'exploitation","Diagnostic et dépannage","Imprimantes et périphériques","Virus, sécurité et sauvegarde","Portables et smartphones"],"nbEx":19,"nbQuiz":9},{"id":"electricite","nom":"Électricité","jour":"Mercredi","heure":"12h – 14h","couleur":"#FFD23F","intro":"Courant continu et alternatif, puissance, énergie, installation domestique et sécurité.","role":{"sert":"Travailler en sécurité sur les installations qui alimentent le matériel informatique, choisir un onduleur ou une installation solaire, et comprendre une facture d'électricité.","savoir":["Calculer tension, courant, puissance et énergie","Lire un schéma électrique","Choisir les protections (disjoncteur, différentiel)","Dimensionner un onduleur ou une batterie"],"metiers":["Technicien en installation électrique","Installateur solaire","Technicien réseau et courant faible"]},"ch":["Le circuit électrique","Le courant alternatif","Puissance et énergie","L'installation domestique","La sécurité électrique","Onduleur, groupe électrogène et solaire","Schémas et symboles électriques","Moteurs et machines électriques"],"nbEx":16,"nbQuiz":9},{"id":"anglais","nom":"Anglais","jour":"Mercredi","heure":"14h – 16h","couleur":"#FF6B8A","intro":"L'anglais de l'informaticien : vocabulaire technique, grammaire utile, e-mails et entretien d'embauche.","role":{"sert":"La documentation, les logiciels, les tutoriels et les forums informatiques sont presque tous en anglais. C'est aussi un atout pour un stage ou un emploi à l'international.","savoir":["Le vocabulaire du matériel et des logiciels","Lire un manuel et suivre des instructions","Écrire un e-mail professionnel","Se présenter en entretien"],"metiers":["Tous les métiers de l'informatique","Support client international","Développeur (documentation en anglais)"]},"ch":["IT vocabulary","Present simple and present continuous","Giving instructions","Past simple: reporting a problem","Writing a professional e-mail","Job interview","Comparing devices","Modal verbs: can, must, should","Talking about the future: will and going to"],"nbEx":17,"nbQuiz":9},{"id":"bureautique","nom":"Bureautique informatique","jour":"Jeudi","heure":"12h – 14h","couleur":"#4ADE80","intro":"Maîtriser Windows, Word, Excel, PowerPoint et la messagerie comme un professionnel.","role":{"sert":"Produire des documents professionnels rapidement : rapports, factures, tableaux de notes, présentations. Toutes les entreprises en ont besoin chaque jour.","savoir":["Mettre en forme un rapport long avec table des matières","Calculer et analyser avec Excel","Faire une présentation claire","Travailler en équipe sur Google Drive"],"metiers":["Assistant administratif","Secrétaire bureautique","Formateur en bureautique"]},"ch":["Windows et la gestion des fichiers","Microsoft Word","Microsoft Excel","PowerPoint et la présentation","Internet et messagerie","Excel avancé","Travailler en ligne : Google Drive et Google Workspace","Microsoft Access : la base de données bureautique"],"nbEx":17,"nbQuiz":9},{"id":"multimedia","nom":"Multimédia","jour":"Vendredi","heure":"8h – 10h","couleur":"#C084FC","intro":"Image, son et vidéo numériques : comprendre les formats, retoucher, monter et publier.","role":{"sert":"Créer des visuels, des vidéos et du son de qualité pour les réseaux sociaux, les sites web et la publicité.","savoir":["Retoucher et préparer des images","Créer un logo vectoriel","Monter une vidéo pour TikTok ou YouTube","Utiliser des ressources sans violer le droit d'auteur"],"metiers":["Infographiste","Monteur vidéo","Community manager","Designer 3D"]},"ch":["L'image numérique","La retouche d'image","Le graphisme vectoriel et la PAO","Le son numérique","La vidéo numérique","Monter une vidéo pas à pas","Droit d'auteur et ressources libres","La 3D et l'animation"],"nbEx":16,"nbQuiz":9},{"id":"francais","nom":"Français","jour":"Vendredi","heure":"10h – 12h","couleur":"#F97316","intro":"Bien communiquer à l'écrit et à l'oral : résumé, lettres, rapport de stage, exposé et grammaire utile.","role":{"sert":"Bien écrire et bien parler pour être pris au sérieux : CV, lettres, rapport de stage, exposés et échanges avec les clients.","savoir":["Résumer un texte","Écrire une lettre et un CV","Rédiger un rapport de stage","Argumenter et présenter à l'oral"],"metiers":["Utile dans tous les métiers","Rédacteur web","Chargé de communication"]},"ch":["La communication","Le résumé de texte","La lettre administrative et la demande de stage","Le rapport de stage","L'exposé oral","Grammaire et orthographe utiles","Le CV et la lettre de motivation","Le compte rendu et le procès-verbal","L'argumentation"],"nbEx":15,"nbQuiz":9},{"id":"ia","nom":"Intelligence artificielle","jour":"Samedi","heure":"10h – 12h","couleur":"#38BDF8","intro":"Comprendre l'IA : apprentissage automatique, réseaux de neurones, IA générative et éthique.","role":{"sert":"Comprendre la technologie qui transforme tous les métiers, savoir l'utiliser intelligemment et poser les bases pour créer ses propres modèles.","savoir":["Expliquer le machine learning","Préparer des données","Comprendre un réseau de neurones","Écrire de bons prompts et coder en Python"],"metiers":["Analyste de données","Développeur IA","Tous les métiers qui utilisent l'IA"]},"ch":["Qu'est-ce que l'intelligence artificielle ?","Le machine learning","Les données et l'entraînement","Les réseaux de neurones","L'IA générative et les prompts","Éthique et limites de l'IA","Quelques algorithmes classiques","Python pour débuter en IA","Vision par ordinateur et traitement du langage"],"nbEx":16,"nbQuiz":9},{"id":"web","nom":"Développement web","jour":"Samedi","heure":"12h – 14h","couleur":"#FB7185","intro":"Créer des sites de A à Z : HTML, CSS, JavaScript, PHP, MySQL et mise en ligne.","role":{"sert":"Créer des sites et des applications web, de la page vitrine à la boutique en ligne : une compétence très recherchée et facile à vendre.","savoir":["Coder en HTML, CSS et JavaScript","Créer un formulaire avec PHP et MySQL","Mettre un site en ligne","Être bien placé sur Google"],"metiers":["Développeur web","Webmaster","Intégrateur","Freelance"]},"ch":["Comment fonctionne le web","HTML : la structure","CSS : le style","JavaScript : l'interactivité","PHP et les formulaires","Les bases de données MySQL","Mettre un site en ligne","JavaScript : tableaux, objets et JSON","WordPress et les CMS","Le référencement naturel (SEO)"],"nbEx":18,"nbQuiz":9},{"id":"genie-logiciel","nom":"Génie logiciel","jour":"Samedi","heure":"14h – 16h","couleur":"#A3E635","intro":"Concevoir un logiciel proprement : cycle de vie, cahier des charges, UML, Merise, tests et Git.","role":{"sert":"Construire des logiciels sérieux, en équipe, sans se perdre : analyser le besoin, concevoir, coder proprement, tester et livrer à temps.","savoir":["Rédiger un cahier des charges","Faire des schémas UML et un MCD","Écrire des algorithmes","Planifier un projet et utiliser Git"],"metiers":["Développeur","Analyste programmeur","Chef de projet informatique"]},"ch":["Le cycle de vie d'un logiciel","Le cahier des charges","UML : modéliser le logiciel","Merise : concevoir la base de données","Les tests","Git et la gestion de versions","L'algorithmique","La programmation orientée objet","Gestion de projet : planning, Gantt et PERT"],"nbEx":15,"nbQuiz":9},{"id":"reseaux","nom":"Réseaux informatiques","jour":"Samedi","heure":"16h – 18h","couleur":"#22D3EE","intro":"Relier les machines : topologies, OSI et TCP/IP, câblage, adressage IP, sous-réseaux et services.","role":{"sert":"Relier les ordinateurs entre eux et à Internet, dans une école, une entreprise ou un cyber, et sécuriser ces connexions.","savoir":["Câbler et installer un réseau local","Calculer des adresses IP et des sous-réseaux","Configurer DHCP, DNS, Wi-Fi","Configurer un routeur et sécuriser le réseau"],"metiers":["Technicien réseau","Administrateur systèmes et réseaux","Technicien télécoms"]},"ch":["Les notions de base","Le modèle OSI et TCP/IP","Matériel et câblage","L'adressage IPv4","Les sous-réseaux","Services réseau et Wi-Fi","IPv6 et les VLAN","Sécurité réseau","Configurer un réseau avec Packet Tracer"],"nbEx":18,"nbQuiz":9}];
+const LOGO="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTJDMkI1IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTE0IDh2Nk0yNCA4djZNMzQgOHY2TTQ0IDh2Nk01MCAxNGg2TTUwIDI0aDZNNTAgMzRoNk01MCA0NGg2TTggMjBoNk04IDMwaDZNOCA0MGg2TTggNTBoNk0yMCA1MHY2TTMwIDUwdjZNNDAgNTB2NiIvPjwvZz48cmVjdCB4PSIxNCIgeT0iMTQiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgcng9IjgiIGZpbGw9IiMxNzEzMkYiIHN0cm9rZT0iI0U2MDA3RSIgc3Ryb2tlLXdpZHRoPSIzIi8+PHBhdGggZD0iTTIwIDI0bDUgMTcgNy0xMiA3IDEyIDUtMTciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y0QjQwMCIgc3Ryb2tlLXdpZHRoPSI0LjUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==";const TEL="+221 76 938 55 19";const WA="221769385519";
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// Ordinateur en 3D qui s'assemble pièce par pièce (Three.js r128, chargé dans index.html).
+function mountPC(box, caption, subjects, onPick) {
+  const THREE = window.THREE;
+  if (!THREE) return false;
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return false; }
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  box.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(34, 1, .1, 100);
+  cam.position.set(8.2, 5.4, 11.2);
+  const target = new THREE.Vector3(0, 2.0, 0);
+  cam.lookAt(target);
+
+  // ---------- textures dessinées ----------
+  function tex(w, h, draw) { const c = document.createElement("canvas"); c.width = w; c.height = h; draw(c.getContext("2d"), w, h); const t = new THREE.CanvasTexture(c); t.anisotropy = 8; return t; }
+  const boardTex = tex(1024, 1024, (g, w, h) => {
+    g.fillStyle = "#1a2433"; g.fillRect(0, 0, w, h);
+    g.strokeStyle = "rgba(140,170,210,.18)"; g.lineWidth = 3;
+    for (let i = 0; i < 70; i++) { g.beginPath(); let x = Math.random() * w, y = Math.random() * h; g.moveTo(x, y); for (let k = 0; k < 3; k++) { if (k % 2) x += (Math.random() - .5) * 300; else y += (Math.random() - .5) * 300; g.lineTo(x, y); } g.stroke(); }
+    g.fillStyle = "#c9cfd8"; g.fillRect(360, 250, 300, 300);                 // socket
+    g.fillStyle = "#2b3442"; g.fillRect(380, 270, 260, 260);
+    for (let i = 0; i < 4; i++) { g.fillStyle = "#0f141c"; g.fillRect(720 + i * 46, 160, 26, 560); }   // slots RAM
+    g.fillStyle = "#0f141c"; g.fillRect(120, 640, 800, 34); g.fillRect(120, 770, 800, 34);           // PCIe
+    g.fillStyle = "#3a4a63"; g.fillRect(140, 880, 260, 60);                                          // M.2
+    g.fillStyle = "#8a96a8"; g.font = "bold 34px monospace"; g.fillText("WMA-Z790", 120, 120);
+  });
+
+  // ---------- matériaux ----------
+  const M = (o) => new THREE.MeshStandardMaterial(o);
+  const black = M({ color: 0x15181d, metalness: .6, roughness: .45 });
+  const dark = M({ color: 0x232a35, metalness: .5, roughness: .5 });
+  const alu = M({ color: 0xb9c2cf, metalness: .9, roughness: .28 });
+  const copper = M({ color: 0xc8823e, metalness: 1, roughness: .3 });
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0x9fb4d0, metalness: 0, roughness: .05, transmission: .0, transparent: true, opacity: .12 });
+  const rgbA = M({ color: 0xE6007E, emissive: 0xE6007E, emissiveIntensity: 1.7 });
+  const rgbB = M({ color: 0x12C2B5, emissive: 0x12C2B5, emissiveIntensity: 1.6 });
+
+  const pc = new THREE.Group(); scene.add(pc);
+  const parts = [];
+  function part(name, group, from) { group.userData.home = group.position.clone(); group.userData.homeRot = group.rotation.clone(); group.userData.from = from; pc.add(group); parts.push({ name, g: group }); return group; }
+  const box3 = (w, h, d, m) => new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
+
+  // Boîtier (cadre + vitre)
+  const caseG = new THREE.Group();
+  const W = 2.2, H = 4.4, D = 4.4;
+  [[W, .08, D, 0, 0, 0], [W, .08, D, 0, H, 0], [.08, H, D, -W / 2, H / 2, 0], [W, H, .08, 0, H / 2, -D / 2]].forEach(([w, h, d, x, y, z]) => { const m = box3(w, h, d, black); m.position.set(x, y, z); caseG.add(m); });
+  const front = box3(W, H, .1, dark); front.position.set(0, H / 2, D / 2); caseG.add(front);
+  for (let i = 0; i < 3; i++) { const ring = new THREE.Mesh(new THREE.TorusGeometry(.48, .05, 12, 40), i % 2 ? rgbB : rgbA); ring.position.set(0, 1 + i * 1.2, D / 2 + .06); caseG.add(ring); }
+  const pane = box3(.03, H - .1, D - .1, glass); pane.position.set(W / 2, H / 2, 0); caseG.add(pane);
+  part("Boîtier", caseG, new THREE.Vector3(0, -6, 0));
+
+  // Carte mère
+  const mb = new THREE.Group();
+  const board = new THREE.Mesh(new THREE.BoxGeometry(.06, 3.5, 3.3), [dark, dark, dark, dark, dark, dark]);
+  board.material = [M({ map: boardTex, metalness: .3, roughness: .6 }), dark, dark, dark, dark, dark];
+  mb.add(board); mb.position.set(-W / 2 + .14, 2.35, -.3); mb.rotation.y = 0;
+  // texture vue depuis +x : on tourne la face
+  part("Carte mère", mb, new THREE.Vector3(5, 0, 0));
+
+  // Processeur + ventirad
+  const cpu = new THREE.Group();
+  const chip = box3(.06, .5, .5, alu); cpu.add(chip);
+  const base = box3(.18, .6, .6, copper); base.position.x = .12; cpu.add(base);
+  for (let i = 0; i < 14; i++) { const fin = box3(.75, .02, .9, alu); fin.position.set(.6, -.55 + i * .085, 0); cpu.add(fin); }
+  const fan = new THREE.Group(); fan.position.set(.6, 0, .5);
+  const hub = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, .06, 20), black); hub.rotation.x = Math.PI / 2; fan.add(hub);
+  for (let i = 0; i < 7; i++) { const b = box3(.06, .42, .02, black); b.position.y = .22; const p = new THREE.Group(); p.add(b); p.rotation.z = i * Math.PI * 2 / 7; b.rotation.y = .5; fan.add(p); }
+  const fanRing = new THREE.Mesh(new THREE.TorusGeometry(.5, .04, 10, 36), rgbA); fan.add(fanRing);
+  cpu.add(fan);
+  cpu.position.set(-W / 2 + .2, 2.95, -.3 + 0);
+  part("Processeur", cpu, new THREE.Vector3(4, 2, 0));
+
+  // RAM
+  const ram = new THREE.Group();
+  for (let i = 0; i < 2; i++) { const s = new THREE.Group(); const pcb = box3(.5, 1.75, .05, M({ color: 0x0f3b2f, metalness: .4, roughness: .5 })); s.add(pcb); const sp = box3(.52, 1.6, .07, black); sp.position.y = -.03; s.add(sp); const top = box3(.1, 1.6, .08, i ? rgbB : rgbA); top.position.set(.28, 0, 0); s.add(top); s.position.z = i * .2; ram.add(s); }
+  ram.position.set(-W / 2 + .45, 2.9, .75);
+  ram.children.forEach((s, i) => s.position.set(0, 0, i * .18));
+  part("Mémoire RAM", ram, new THREE.Vector3(4, 3, 0));
+
+  // Carte graphique
+  const gpu = new THREE.Group();
+  const shroud = box3(1.45, .42, 2.9, M({ color: 0x1b1f27, metalness: .7, roughness: .35 })); gpu.add(shroud);
+  const back = box3(1.45, .04, 2.9, alu); back.position.y = .23; gpu.add(back);
+  for (let i = 0; i < 3; i++) { const f = new THREE.Mesh(new THREE.CylinderGeometry(.36, .36, .03, 32), black); f.position.set(.05, -.23, -.95 + i * .95); gpu.add(f); const r = new THREE.Mesh(new THREE.TorusGeometry(.37, .025, 8, 32), rgbB); r.rotation.x = Math.PI / 2; r.position.copy(f.position); gpu.add(r); }
+  const strip = box3(.02, .08, 2.6, rgbA); strip.position.set(.74, .05, 0); gpu.add(strip);
+  gpu.position.set(-W / 2 + .9, 1.75, -.25);
+  part("Carte graphique", gpu, new THREE.Vector3(5, -1, 0));
+
+  // SSD
+  const ssd = box3(.04, .22, .8, M({ color: 0x0c0f14, metalness: .5, roughness: .4 })); ssd.position.set(-W / 2 + .2, 1.15, -1.05);
+  const ssdG = new THREE.Group(); ssdG.add(ssd); part("SSD NVMe", ssdG, new THREE.Vector3(4, 0, 0));
+
+  // Alimentation
+  const psu = new THREE.Group(); const pb = box3(1.5, .75, 1.6, black); psu.add(pb);
+  const grill = new THREE.Mesh(new THREE.CylinderGeometry(.5, .5, .02, 32), dark); grill.position.y = .38; psu.add(grill);
+  psu.position.set(-.25, .48, -1.2);
+  part("Alimentation", psu, new THREE.Vector3(5, -2, 0));
+
+  // Sol + lumières
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(6, 64), M({ color: 0x120f26, metalness: .3, roughness: .7 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -.01; scene.add(floor);
+  scene.add(new THREE.HemisphereLight(0xbfd2ff, 0x101622, .9));
+  const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(6, 9, 6); scene.add(key);
+  const blue = new THREE.PointLight(0xE6007E, 2.4, 7); blue.position.set(.6, 2.5, 1.2); scene.add(blue);
+  const amber = new THREE.PointLight(0x12C2B5, 1.8, 6); amber.position.set(.4, 1.2, -.8); scene.add(amber);
+
+  // ---------- matières en orbite ----------
+  const ring = new THREE.Group(); scene.add(ring); const sprites = [];
+  (subjects || []).forEach((sub, i) => {
+    const t = tex(512, 160, (g, w, h) => {
+      g.fillStyle = "rgba(18,14,40,.92)"; const r = 34;
+      g.beginPath(); g.moveTo(r, 0); g.arcTo(w, 0, w, h, r); g.arcTo(w, h, 0, h, r); g.arcTo(0, h, 0, 0, r); g.arcTo(0, 0, w, 0, r); g.fill();
+      g.strokeStyle = sub.couleur; g.lineWidth = 6; g.stroke();
+      g.fillStyle = sub.couleur; g.beginPath(); g.arc(52, h / 2, 16, 0, 7); g.fill();
+      g.fillStyle = "#fff"; g.font = "700 46px Manrope, system-ui, sans-serif"; g.textBaseline = "middle";
+      let name = sub.nom; while (g.measureText(name).width > 400 && name.length > 4) name = name.slice(0, -2);
+      if (name !== sub.nom) name = name.trim() + "…";
+      g.fillText(name, 88, h / 2 + 2);
+    });
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true, depthWrite: false }));
+    sp.scale.set(2.3, .72, 1); sp.userData = { id: sub.id, a: i / subjects.length * Math.PI * 2 };
+    ring.add(sp); sprites.push(sp);
+  });
+  // particules de données
+  const N = 260, pg = new THREE.BufferGeometry(), pos = new Float32Array(N * 3), spd = [];
+  for (let i = 0; i < N; i++) { const a = Math.random() * 6.28, r = 2.2 + Math.random() * 5.5; pos[i * 3] = Math.cos(a) * r; pos[i * 3 + 1] = Math.random() * 7; pos[i * 3 + 2] = Math.sin(a) * r; spd.push(.004 + Math.random() * .012); }
+  pg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const pts = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xF4B400, size: .05, transparent: true, opacity: .8 }));
+  scene.add(pts);
+  const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let downX = 0, downY = 0;
+  box.addEventListener("pointerdown", e => { downX = e.clientX; downY = e.clientY; });
+  box.addEventListener("pointerup", e => {
+    if (Math.abs(e.clientX - downX) + Math.abs(e.clientY - downY) > 8 || !onPick) return;
+    const r = renderer.domElement.getBoundingClientRect();
+    mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(mouse, cam); const hit = ray.intersectObjects(sprites)[0];
+    if (hit) onPick(hit.object.userData.id);
+  });
+  box.addEventListener("pointermove", e => {
+    const r = renderer.domElement.getBoundingClientRect();
+    mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(mouse, cam); box.style.cursor = ray.intersectObjects(sprites).length ? "pointer" : "grab";
+  });
+
+  // ---------- interaction ----------
+  let rotY = -.35, rotX = 0, drag = false, lx = 0, ly = 0, idle = 0;
+  box.style.touchAction = "pan-y";
+  box.addEventListener("pointerdown", e => { drag = true; lx = e.clientX; ly = e.clientY; idle = 0; });
+  addEventListener("pointerup", () => drag = false);
+  addEventListener("pointermove", e => { if (!drag) return; rotY += (e.clientX - lx) * .008; rotX = Math.max(-.3, Math.min(.3, rotX + (e.clientY - ly) * .004)); lx = e.clientX; ly = e.clientY; });
+
+  function size() { const w = box.clientWidth, h = box.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+  new ResizeObserver(size).observe(box); size();
+
+  const ease = p => p < 0 ? 0 : p > 1 ? 1 : 1 - Math.pow(1 - p, 3);
+  const STEP = .75, START = .3;
+  const t0 = performance.now(); let lastCap = "";
+  function frame() {
+    const t = (performance.now() - t0) / 1000;
+    parts.forEach((p, i) => {
+      const k = reduce ? 1 : ease((t - START - i * STEP) / .9);
+      const f = p.g.userData.from, h = p.g.userData.home;
+      p.g.position.set(h.x + f.x * (1 - k), h.y + f.y * (1 - k), h.z + f.z * (1 - k));
+      p.g.visible = k > 0 || i === 0;
+    });
+    const idx = Math.min(parts.length - 1, Math.floor((t - START) / STEP));
+    const label = t - START > parts.length * STEP + .6 ? "Touche une matière qui tourne" : (idx >= 0 ? `${idx + 1}/${parts.length} · ${parts[idx].name}` : "");
+    if (caption && label !== lastCap) { caption.textContent = label; lastCap = label; }
+    fan.rotation.z = t * 8;
+    const ra = reduce ? 0 : t * .18;
+    sprites.forEach((sp, i) => { const a = sp.userData.a + ra; sp.position.set(Math.cos(a) * 4.6, 2.1 + Math.sin(a * 2 + t * .6) * .55, Math.sin(a) * 4.6); sp.material.opacity = Math.min(1, Math.max(0, (t - parts.length * STEP) / 1.2)); });
+    if (!reduce) { const pa = pg.attributes.position.array; for (let i = 0; i < N; i++) { pa[i * 3 + 1] += spd[i]; if (pa[i * 3 + 1] > 7) pa[i * 3 + 1] = 0; } pg.attributes.position.needsUpdate = true; }
+    if (!drag) { idle += 1 / 60; if (idle > 2 && !reduce) rotY += .0025; }
+    pc.rotation.y = rotY; pc.rotation.x = rotX;
+    pc.position.set(0, 0, 0);
+    renderer.render(scene, cam);
+    requestAnimationFrame(frame);
+  }
+  frame();
+  return true;
+}
+
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, serverTimestamp, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* ================= RÉGLAGES ================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyBth-JDdM5-z31k5DR_hqNYNxmXyv_XA1A",
+  authDomain: "webmaster-academy.firebaseapp.com",
+  projectId: "webmaster-academy",
+  storageBucket: "webmaster-academy.firebasestorage.app",
+  messagingSenderId: "122811433560",
+  appId: "1:122811433560:web:6e8a4f3f400e15609a402d"
+};
+const ADMIN_EMAIL = "mouham773562848@gmail.com";
+const PRIX = "5 000 FCFA";
+const WAVE = "76 938 55 19";
+/* ============================================ */
+
+const fb = initializeApp(firebaseConfig);
+const auth = getAuth(fb); auth.languageCode = "fr";
+const db = getFirestore(fb);
+
+const $ = (s, r = document) => r.querySelector(s);
+const app = $("#app");
+const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const inl = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+const byId = Object.fromEntries(SUBJECTS.map(s => [s.id, s]));
+const DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+const HOURS = ["8h – 10h", "10h – 12h", "12h – 14h", "14h – 16h", "16h – 18h"];
+const todayIdx = (() => { const d = new Date().getDay(); return d === 0 ? -1 : d - 1; })();
+const nCh = SUBJECTS.reduce((a, s) => a + s.ch.length, 0);
+const nEx = SUBJECTS.reduce((a, s) => a + s.nbEx, 0);
+const nQz = SUBJECTS.reduce((a, s) => a + s.nbQuiz, 0);
+
+let USER = null, PROFILE = null, P = { done: {}, quiz: {} };
+const COURSES = {};
+const isAdmin = () => !!(USER && USER.email && USER.email.toLowerCase() === ADMIN_EMAIL);
+const pct = s => Math.round(100 * s.ch.filter((c, i) => P.done[s.id + ":" + i]).length / s.ch.length);
+let saveT; const save = () => { clearTimeout(saveT); saveT = setTimeout(() => setDoc(doc(db, "progress", USER.uid), P).catch(() => {}), 600); };
+
+function md(src) {
+  const L = src.replace(/^\n+|\n+$/g, "").split("\n"); let h = "", i = 0;
+  while (i < L.length) {
+    const l = L[i];
+    if (!l.trim()) { i++; continue; }
+    if (l.trim() === ":::") { const c = []; i++; while (i < L.length && L[i].trim() !== ":::") { c.push(L[i]); i++; } i++; h += `<pre><code>${esc(c.join("\n"))}</code></pre>`; continue; }
+    if (l.startsWith("## ")) { h += `<h3>${inl(l.slice(3))}</h3>`; i++; continue; }
+    if (l.startsWith("|")) { const rows = []; while (i < L.length && L[i].startsWith("|")) { rows.push(L[i].replace(/^\||\|$/g, "").split("|")); i++; }
+      h += `<div class="tbl"><table><thead><tr>${rows[0].map(c => `<th>${inl(c.trim())}</th>`).join("")}</tr></thead><tbody>${rows.slice(1).map(r => `<tr>${r.map(c => `<td>${inl(c.trim())}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`; continue; }
+    if (l.startsWith("- ")) { const it = []; while (i < L.length && L[i].startsWith("- ")) { it.push(L[i].slice(2)); i++; } h += `<ul>${it.map(x => `<li>${inl(x)}</li>`).join("")}</ul>`; continue; }
+    if (/^\d+\. /.test(l)) { const it = []; while (i < L.length && /^\d+\. /.test(L[i])) { it.push(L[i].replace(/^\d+\. /, "")); i++; } h += `<ol>${it.map(x => `<li>${inl(x)}</li>`).join("")}</ol>`; continue; }
+    if (l.startsWith("= ")) { h += `<div class="formula">${inl(l.slice(2))}</div>`; i++; continue; }
+    if (l.startsWith("> ")) { h += `<div class="tip"><b>Astuce :</b>${inl(l.slice(2).replace(/^Astuce\s*:\s*/, ""))}</div>`; i++; continue; }
+    if (l.startsWith("! ")) { h += `<div class="warn"><b>Attention :</b>${inl(l.slice(2))}</div>`; i++; continue; }
+    const p = []; while (i < L.length && L[i].trim() && !/^(## |\||- |\d+\. |= |> |! |:::)/.test(L[i])) { p.push(L[i]); i++; }
+    h += `<p>${inl(p.join(" "))}</p>`;
+  }
+  return h;
+}
+const answer = r => r.startsWith("Code :") ? `<pre><code>${esc(r.replace(/^Code :\n?/, ""))}</code></pre>` : r.split("\n").map(x => `<p style="margin:0 0 6px">${inl(x)}</p>`).join("");
+
+/* ---------------- en-tête ---------------- */
+function header(active) {
+  let right;
+  if (!USER) right = `<button class="btn small" data-open="login">Se connecter</button><button class="btn small primary hide-sm" data-open="register">Créer un compte</button>`;
+  else if (PROFILE?.status === "approved" || isAdmin()) right = `<a class="btn small ${active === "accueil" ? "cur" : ""}" href="#accueil">Accueil</a><a class="btn small hide-sm ${active === "emploi" ? "cur" : ""}" href="#emploi">Emploi du temps</a>${isAdmin() ? `<a class="btn small ${active === "admin" ? "cur" : ""}" href="#admin">Admin</a>` : ""}<button class="btn small" id="out">Quitter</button>`;
+  else right = `<button class="btn small" id="out">Se déconnecter</button>`;
+  return `<header class="top"><div class="wrap"><a class="brand" href="#accueil"><img src="${LOGO}" alt=""><b>WebMaster <span>Academy</span></b></a><nav class="right nav">${right}</nav></div></header>`;
+}
+const footer = () => `<footer><div class="wrap"><span>© ${new Date().getFullYear()} WebMaster Academy · Cours de 2ᵉ année DT Informatique et Webmaster · Thiès</span><span>${TEL}</span></div></footer>`;
+function wire() { const o = $("#out"); if (o) o.onclick = () => signOut(auth); }
+
+/* ---------------- accueil 3D (commun) ---------------- */
+function hero(loggedIn) {
+  let idx = todayIdx, label = "Aujourd'hui"; if (idx < 0) { idx = 0; label = "Demain"; }
+  const today = SUBJECTS.filter(s => s.jour === DAYS[idx]);
+  const first = (PROFILE?.nom || USER?.displayName || "").split(" ")[0];
+  return `<section class="hero3d"><div class="scene" id="pc"><div class="cap" id="pccap">Démarrage…</div></div>
+    <div class="wrap copy">
+      <div class="kicker">DT Informatique et Webmaster · 2ᵉ année · Thiès</div>
+      <h1>${loggedIn ? `Bon retour, <span class="g">${esc(first)}</span>.` : `Toute ton année d'informatique, <span class="g">en un seul endroit</span>.`}</h1>
+      <p class="lead">${SUBJECTS.length} matières, ${nCh} chapitres expliqués simplement, ${nEx} exercices corrigés et un quiz par matière.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">${loggedIn ? `<a class="btn primary" href="#programme">Ouvrir mes cours</a><a class="btn ghost" href="#emploi">Emploi du temps</a>` : `<button class="btn primary" data-open="register">Créer mon compte</button><a class="btn ghost" href="#acces">Comment avoir l'accès</a>`}</div>
+      <div class="facts"><div><b>${SUBJECTS.length}</b>matières</div><div><b>${nCh}</b>chapitres</div><div><b>${nEx}</b>exercices corrigés</div><div><b>${nQz}</b>questions de quiz</div></div>
+      ${loggedIn ? `<div class="todaybox"><span class="d">${label} · ${DAYS[idx]}</span>${today.map(s => `<a href="#m-${s.id}" style="--c:${s.couleur}">${esc(s.nom)}<small>${s.heure}</small></a>`).join("")}</div>` : ""}
+    </div></section>`;
+}
+function mount3d(loggedIn) {
+  const ok = mountPC($("#pc"), $("#pccap"), SUBJECTS, id => { if (loggedIn) location.hash = "m-" + id; else openAuth("register"); });
+  if (!ok) $("#pc").insertAdjacentHTML("beforeend", `<div class="nogl"><img src="${LOGO}" alt=""></div>`);
+}
+function cards(loggedIn) {
+  return `<div class="mgrid">${SUBJECTS.map((s, i) => { const p = loggedIn ? pct(s) : 0; return `<a class="mcard" href="${loggedIn ? "#m-" + s.id : "#acces"}" style="--c:${s.couleur}">
+    <span class="num">${String(i + 1).padStart(2, "0")}</span><span class="day">${s.jour} · ${s.heure}</span><h3>${esc(s.nom)}</h3>
+    <p>${esc(s.role ? s.role.sert.split(". ")[0] + "." : s.intro)}</p>
+    ${loggedIn ? `<div class="bar"><span style="width:${p}%"></span></div>` : ""}
+    <div class="foot"><span>${s.ch.length} chapitres · ${s.nbEx} exercices</span><span>${loggedIn ? p + " %" : "🔒"}</span></div></a>`; }).join("")}</div>`;
+}
+
+function renderPublic() {
+  app.innerHTML = header() + hero(false) + `
+  <section class="band" id="programme"><div class="wrap"><div class="sh"><div><h2>Au programme</h2><p>Les cours complets s'ouvrent dès que ton compte est validé.</p></div></div>${cards(false)}</div></section>
+  <section class="band white" id="acces"><div class="wrap">
+    <div class="sh"><div><h2>Comment avoir l'accès</h2></div></div>
+    <div class="steps">
+      <div class="panel"><div class="kicker" style="color:var(--hibiscus)">Étape 1</div><h3 style="font-size:24px;margin:6px 0">Crée ton compte</h3><p style="margin:0;color:var(--muted)">Nom, téléphone, e-mail et mot de passe. Confirme ensuite ton adresse avec le lien reçu par e-mail.</p></div>
+      <div class="panel"><div class="kicker" style="color:var(--hibiscus)">Étape 2</div><h3 style="font-size:24px;margin:6px 0">Paie avec Wave</h3><p style="margin:0;color:var(--muted)">Envoie ${esc(PRIX)} au ${esc(WAVE)}, puis la capture du paiement sur WhatsApp avec l'e-mail de ton compte.</p></div>
+      <div class="panel"><div class="kicker" style="color:var(--hibiscus)">Étape 3</div><h3 style="font-size:24px;margin:6px 0">Accès validé</h3><p style="margin:0;color:var(--muted)">Dès que le paiement est vérifié, ton compte est activé et tous les cours s'ouvrent.</p></div>
+    </div>
+    <div class="price" style="margin-top:16px">
+      <div class="panel"><div class="kicker" style="color:var(--hibiscus)">Accès complet</div><div class="big" style="font-size:clamp(38px,6vw,56px);margin:10px 0 12px">${esc(PRIX)}</div><button class="btn primary" data-open="register">Créer mon compte</button></div>
+      <div class="panel"><div class="kicker" style="color:var(--hibiscus)">Wave et WhatsApp</div><div class="big" style="font-size:clamp(28px,5vw,40px);margin:10px 0 14px">${TEL}</div>
+        <a class="btn" style="background:#25D366;border-color:#25D366;color:#062B14" href="https://wa.me/${WA}?text=${encodeURIComponent("Bonjour, je veux l'accès à WebMaster Academy.")}" target="_blank" rel="noopener">Écrire sur WhatsApp</a></div>
+    </div>
+  </div></section>` + footer();
+  mount3d(false); wire();
+}
+
+/* ---------------- connexion / inscription ---------------- */
+const dlg = $("#auth");
+function openAuth(which) {
+  const reg = which === "register";
+  $("#tab-login").setAttribute("aria-selected", !reg); $("#tab-register").setAttribute("aria-selected", reg);
+  $("#f-login").hidden = reg; $("#f-register").hidden = !reg; $("#m-login").textContent = ""; $("#m-register").textContent = "";
+  if (!dlg.open) dlg.showModal();
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-open]"); if (b) { e.preventDefault(); openAuth(b.dataset.open); } });
+$("#tab-login").onclick = () => openAuth("login"); $("#tab-register").onclick = () => openAuth("register");
+const ERR = { "auth/email-already-in-use": "Cette adresse e-mail a déjà un compte. Connecte-toi.", "auth/invalid-email": "Cette adresse e-mail n'est pas valide.", "auth/weak-password": "Mot de passe trop faible (8 caractères minimum).", "auth/invalid-credential": "E-mail ou mot de passe incorrect.", "auth/wrong-password": "E-mail ou mot de passe incorrect.", "auth/user-not-found": "Aucun compte avec cette adresse.", "auth/too-many-requests": "Trop d'essais. Attends quelques minutes.", "auth/network-request-failed": "Pas de connexion Internet. Réessaie.", "auth/operation-not-allowed": "La connexion par e-mail n'est pas encore activée dans Firebase.", "auth/unauthorized-domain": "Ce site n'est pas encore autorisé dans Firebase (domaines autorisés)." };
+const errMsg = e => ERR[e?.code] || "Une erreur s'est produite. Réessaie dans un instant.";
+const say = (el, t, ok) => { el.textContent = t; el.className = "msg " + (ok ? "okk" : "err"); };
+$("#f-login").addEventListener("submit", async e => { e.preventDefault(); const b = e.submitter; b.disabled = true;
+  try { await signInWithEmailAndPassword(auth, $("#l-email").value.trim(), $("#l-pass").value); dlg.close(); } catch (err) { say($("#m-login"), errMsg(err)); } b.disabled = false; });
+$("#forgot").onclick = async () => { const em = $("#l-email").value.trim(); if (!em) return say($("#m-login"), "Écris d'abord ton adresse e-mail ci-dessus.");
+  try { await sendPasswordResetEmail(auth, em); say($("#m-login"), "Un e-mail pour changer ton mot de passe t'a été envoyé.", true); } catch (err) { say($("#m-login"), errMsg(err)); } };
+$("#f-register").addEventListener("submit", async e => { e.preventDefault(); const b = e.submitter;
+  const nom = $("#r-nom").value.trim(), telephone = $("#r-tel").value.trim(), email = $("#r-email").value.trim(), pass = $("#r-pass").value;
+  if (pass !== $("#r-pass2").value) return say($("#m-register"), "Les deux mots de passe ne sont pas identiques.");
+  b.disabled = true;
+  try { const c = await createUserWithEmailAndPassword(auth, email, pass); await updateProfile(c.user, { displayName: nom });
+    await setDoc(doc(db, "users", c.user.uid), { email: c.user.email, nom, telephone, status: "pending", createdAt: serverTimestamp() });
+    await sendEmailVerification(c.user); dlg.close(); boot(c.user);
+  } catch (err) { say($("#m-register"), errMsg(err)); } b.disabled = false; });
+
+/* ---------------- écrans d'attente ---------------- */
+function gate(html) { app.innerHTML = header() + `<div class="gate"><div class="panel">${html}</div></div>` + footer(); wire(); }
+function renderVerify() {
+  gate(`<span class="badge pending">Étape 1 sur 3</span><h1>Confirme ton adresse e-mail</h1>
+    <p>Nous avons envoyé un lien à <b>${esc(USER.email)}</b>. Ouvre ta boîte mail (regarde aussi dans les <b>spams</b>), clique sur le lien, puis reviens ici.</p>
+    <div class="row"><button class="btn primary" id="checked">J'ai confirmé mon e-mail</button><button class="btn" id="resend">Renvoyer l'e-mail</button></div><p class="msg" id="gm" role="status"></p>`);
+  $("#checked").onclick = async () => { await auth.currentUser.reload(); await auth.currentUser.getIdToken(true); if (auth.currentUser.emailVerified) boot(auth.currentUser); else say($("#gm"), "Ton adresse n'est pas encore confirmée. Clique sur le lien dans l'e-mail."); };
+  $("#resend").onclick = async () => { try { await sendEmailVerification(auth.currentUser); say($("#gm"), "E-mail renvoyé.", true); } catch (err) { say($("#gm"), errMsg(err)); } };
+}
+function renderPending() {
+  const txt = encodeURIComponent(`Bonjour, j'ai payé l'accès WebMaster Academy. E-mail du compte : ${USER.email}`);
+  gate(`<span class="badge pending">En attente de validation</span><h1>Plus qu'une étape</h1><p>Ton e-mail est confirmé. Pour ouvrir les cours :</p>
+    <ol><li>Envoie <b>${esc(PRIX)}</b> par Wave au <b>${esc(WAVE)}</b>.</li><li>Envoie la capture du paiement sur WhatsApp avec l'e-mail de ton compte : <b>${esc(USER.email)}</b>.</li><li>Ton compte est validé dès que le paiement est vérifié. Reviens alors ici.</li></ol>
+    <div class="row"><a class="btn primary" href="https://wa.me/${WA}?text=${txt}" target="_blank" rel="noopener">Envoyer la preuve sur WhatsApp</a><button class="btn" id="again">Vérifier mon accès</button></div>`);
+  $("#again").onclick = () => boot(auth.currentUser);
+}
+function renderBlocked() { gate(`<span class="badge blocked">Accès suspendu</span><h1>Ton accès est suspendu</h1><p>Contacte l'administrateur sur WhatsApp au <b>${TEL}</b>.</p>`); }
+
+/* ---------------- espace étudiant ---------------- */
+const IDX = []; SUBJECTS.forEach(s => s.ch.forEach((t, i) => IDX.push({ s, i, t, n: t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "") })));
+let PENDING = null;
+function renderHome(anchor) {
+  app.innerHTML = header("accueil") + hero(true) + `
+  <section class="band" id="programme"><div class="wrap">
+    <div class="sh"><div><h2>Mes 12 matières</h2><p>Ta progression est enregistrée sur ton compte.</p></div>
+      <label class="search" for="q"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Chercher un chapitre…" autocomplete="off"></label></div>
+    <div class="results" id="results"></div>${cards(true)}</div></section>` + footer();
+  mount3d(true); wire();
+  $("#q").addEventListener("input", e => { const v = e.target.value.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""), out = $("#results");
+    if (v.length < 2) { out.innerHTML = ""; return; }
+    const hits = IDX.filter(x => x.n.includes(v)).slice(0, 8);
+    out.innerHTML = hits.length ? hits.map(x => `<a href="#m-${x.s.id}" data-ch="${x.i}"><b>${esc(x.t)}</b><br><small>${esc(x.s.nom)} · chapitre ${x.i + 1}</small></a>`).join("") : `<p style="color:var(--muted)">Aucun chapitre ne correspond.</p>`;
+    out.querySelectorAll("a").forEach(a => a.onclick = () => PENDING = +a.dataset.ch); });
+  if (anchor === "programme") $("#programme").scrollIntoView(); else window.scrollTo(0, 0);
+}
+function renderSchedule() {
+  let h = `<table><thead><tr><th>Horaire</th>${DAYS.map((d, i) => `<th class="${i === todayIdx ? "now" : ""}">${d}</th>`).join("")}</tr></thead><tbody>`;
+  HOURS.forEach(hr => { h += `<tr><td class="h">${hr}</td>`; DAYS.forEach(d => { const s = SUBJECTS.find(x => x.jour === d && x.heure === hr); h += `<td>${s ? `<a class="slot" style="--c:${s.couleur}" href="#m-${s.id}">${esc(s.nom)}</a>` : ""}</td>`; }); h += "</tr>"; });
+  app.innerHTML = header("emploi") + `<section class="band"><div class="wrap"><div class="kicker" style="color:var(--hibiscus)">2ᵉ année · DT Informatique et Webmaster</div><h1 style="font-size:clamp(36px,5.4vw,56px);margin:8px 0 6px">Emploi du temps</h1><p class="sub">Touche un cours pour l'ouvrir.</p><div class="sched">${h}</tbody></table></div></div></section>` + footer();
+  wire(); window.scrollTo(0, 0);
+}
+async function renderSubject(s, ch) {
+  if (!COURSES[s.id]) {
+    app.innerHTML = header("programme") + `<div class="gate"><div class="panel"><h1>${esc(s.nom)}</h1><p>Chargement du cours…</p></div></div>`; wire();
+    try { const snap = await getDoc(doc(db, "courses", s.id)); COURSES[s.id] = snap.exists() ? snap.data() : null; } catch (e) { COURSES[s.id] = null; }
+    if (!COURSES[s.id]) { gate(`<h1>${esc(s.nom)}</h1><p>${isAdmin() ? "Ce cours n'est pas encore importé. Va dans <b>Admin → Importer les cours</b>." : "Ce cours n'est pas encore disponible. Réessaie plus tard."}</p><a class="btn" href="#accueil">Retour</a>`); delete COURSES[s.id]; return; }
+  }
+  drawSubject(s, COURSES[s.id], ch);
+}
+function drawSubject(s, c, ch) {
+  const total = c.chapitres.length, isQuiz = ch === total, R = s.role;
+  const toc = c.chapitres.map((x, i) => { const d = P.done[s.id + ":" + i]; return `<button type="button" data-i="${i}" class="${i === ch ? "on" : ""} ${d ? "done" : ""}"><span class="n">${d ? "✓" : i + 1}</span>${esc(x.t)}</button>`; }).join("") + `<button type="button" data-i="${total}" class="${isQuiz ? "on" : ""}"><span class="n">?</span>Quiz</button>`;
+  let body;
+  if (isQuiz) body = `<div class="kick">Quiz · ${c.quiz.length} questions</div><h2>Teste-toi en ${esc(s.nom)}</h2>${c.quiz.map((q, qi) => `<div class="qi" data-qi="${qi}"><p>${qi + 1}. ${esc(q.q)}</p><div class="opts">${q.o.map((o, oi) => `<button type="button" data-oi="${oi}">${esc(o)}</button>`).join("")}</div><div class="expl" hidden></div></div>`).join("")}<div class="pager"><b id="score" style="font-size:20px"></b><button class="btn" type="button" id="redo">Recommencer</button></div>`;
+  else { const x = c.chapitres[ch], k = s.id + ":" + ch;
+    body = `<div class="kick">Chapitre ${ch + 1} sur ${total}</div><h2>${esc(x.t)}</h2>${md(x.c)}
+    <div class="exs"><h3>Exercices corrigés</h3>${x.ex.map((e, i) => `<div class="exi"><div class="q"><b>Ex. ${i + 1}</b><div>${inl(e.q)}</div></div><details><summary>Voir la correction</summary><div class="a">${answer(e.r)}</div></details></div>`).join("")}</div>
+    <div class="pager">${ch > 0 ? `<button class="btn" data-go="${ch - 1}">← Précédent</button>` : "<span></span>"}<button class="btn ${P.done[k] ? "ok" : ""}" id="done">${P.done[k] ? "✓ Chapitre terminé" : "Marquer comme terminé"}</button><button class="btn primary" data-go="${ch + 1}">${ch + 1 < total ? "Chapitre suivant →" : "Passer au quiz →"}</button></div>`; }
+  app.innerHTML = header("programme") + `<div class="shead" style="--c:${s.couleur}"><div class="wrap"><a class="back" href="#programme">← Toutes les matières</a><h1>${esc(s.nom)}</h1><p class="intro">${esc(s.intro)}</p>
+    <div class="chips"><span class="chip"><i style="background:${s.couleur}"></i>${s.jour} · ${s.heure}</span><span class="chip">${total} chapitres</span><span class="chip">${pct(s)} % terminé</span>${P.quiz[s.id] != null ? `<span class="chip">Meilleur quiz : ${P.quiz[s.id]}/${c.quiz.length}</span>` : ""}</div></div></div>
+    <div class="wrap" style="padding-bottom:60px;--c:${s.couleur}">${R ? `<div class="role"><div><h3>À quoi sert cette matière ?</h3><p>${esc(R.sert)}</p></div><div><h3>Ce que tu sauras faire</h3><ul>${R.savoir.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div><div><h3>Les métiers</h3><ul>${R.metiers.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div></div>` : ""}
+    <div class="course" style="--c:${s.couleur}"><nav class="toc" aria-label="Chapitres">${toc}</nav><article class="doc">${body}</article></div></div>` + footer();
+  wire();
+  document.querySelectorAll(".toc button,[data-go]").forEach(b => b.onclick = () => { drawSubject(s, c, +(b.dataset.i ?? b.dataset.go)); $(".course").scrollIntoView({ behavior: "smooth" }); });
+  const d = $("#done"); if (d) d.onclick = () => { const k = s.id + ":" + ch; P.done[k] = !P.done[k]; save(); drawSubject(s, c, ch); };
+  if (isQuiz) { let ans = 0, ok = 0;
+    document.querySelectorAll(".qi").forEach(it => { const q = c.quiz[+it.dataset.qi]; it.querySelectorAll(".opts button").forEach(b => b.onclick = () => {
+      if (it.dataset.done) return; it.dataset.done = 1; ans++; const oi = +b.dataset.oi;
+      if (oi === q.a) { b.classList.add("ok"); ok++; } else { b.classList.add("ko"); it.querySelector(`[data-oi="${q.a}"]`).classList.add("ok"); }
+      const ex = it.querySelector(".expl"); ex.hidden = false; ex.textContent = (oi === q.a ? "Bonne réponse. " : "Mauvaise réponse. ") + q.e;
+      if (ans === c.quiz.length) { $("#score").textContent = `Score : ${ok} / ${c.quiz.length}`; P.quiz[s.id] = Math.max(ok, P.quiz[s.id] || 0); save(); } }); });
+    $("#redo").onclick = () => drawSubject(s, c, total); }
+}
+
+/* ---------------- administration ---------------- */
+let USERS = [], FILTER = "pending";
+async function renderAdmin() {
+  app.innerHTML = header("admin") + `<section class="band"><div class="wrap"><div class="kicker" style="color:var(--hibiscus)">Administrateur</div><h1 style="font-size:clamp(36px,5.4vw,56px);margin:8px 0 6px">Administration</h1><p class="sub">Valide les comptes après avoir reçu le paiement Wave.</p><div id="adm">Chargement des comptes…</div></div></section>` + footer();
+  wire();
+  try { USERS = (await getDocs(collection(db, "users"))).docs.map(d => ({ uid: d.id, ...d.data() })); }
+  catch (e) { $("#adm").innerHTML = `<p class="msg err">Impossible de lire les comptes. Vérifie que ton e-mail est confirmé et que les règles Firestore sont bien publiées.</p>${importBox()}`; wireImport(); return; }
+  drawAdmin();
+}
+const importBox = () => `<div class="panel" style="margin-top:22px"><h3 style="font-size:22px">Importer les cours</h3><p class="sub" style="margin:6px 0 12px">Choisis le fichier <b>courses.json</b> que je t'ai envoyé (à refaire à chaque mise à jour des cours).</p><input type="file" id="cfile" accept="application/json,.json"><p class="msg" id="imsg" role="status"></p></div>`;
+function wireImport() { $("#cfile").onchange = async e => { const f = e.target.files[0]; if (!f) return;
+  try { const list = JSON.parse(await f.text()); if (!Array.isArray(list) || !list[0]?.chapitres) throw 0;
+    const batch = writeBatch(db); list.forEach(c => batch.set(doc(db, "courses", c.id), c)); await batch.commit();
+    Object.keys(COURSES).forEach(k => delete COURSES[k]); say($("#imsg"), `${list.length} matières importées avec succès.`, true);
+  } catch (err) { say($("#imsg"), "Import refusé : vérifie le fichier courses.json et les règles Firestore."); } }; }
+function drawAdmin() {
+  const n = st => USERS.filter(u => u.status === st).length, lab = { pending: "En attente", approved: "Validé", blocked: "Suspendu" };
+  const list = USERS.filter(u => FILTER === "all" || u.status === FILTER).sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+  $("#adm").innerHTML = `<div class="kpis"><div class="kpi"><b>${USERS.length}</b><span>comptes</span></div><div class="kpi"><b>${n("pending")}</b><span>en attente</span></div><div class="kpi"><b>${n("approved")}</b><span>validés</span></div><div class="kpi"><b>${n("blocked")}</b><span>suspendus</span></div></div>
+  <div class="toolbar"><div class="seg">${[["pending", "En attente"], ["approved", "Validés"], ["blocked", "Suspendus"], ["all", "Tous"]].map(([k, l]) => `<button type="button" data-f="${k}" class="${FILTER === k ? "on" : ""}">${l}</button>`).join("")}</div><button class="btn small" id="reload">Actualiser</button></div>
+  <div class="ulist">${list.length ? list.map(u => `<div class="urow"><div><b>${esc(u.nom)}</b><br><span>${esc(u.email)}</span><br><span class="mono">${esc(u.telephone)}${u.createdAt?.seconds ? " · " + new Date(u.createdAt.seconds * 1000).toLocaleDateString("fr-FR") : ""}</span></div>
+    <div class="acts"><span class="badge ${u.status}">${lab[u.status] || u.status}</span>${u.status !== "approved" ? `<button class="btn small ok" data-set="approved" data-u="${u.uid}">Valider</button>` : ""}${u.status !== "blocked" ? `<button class="btn small bad" data-set="blocked" data-u="${u.uid}">Suspendre</button>` : ""}<a class="btn small" href="https://wa.me/${(u.telephone || "").replace(/\D/g, "").replace(/^(?!221)/, "221")}" target="_blank" rel="noopener">WhatsApp</a></div></div>`).join("") : `<p style="color:var(--muted)">Aucun compte dans cette liste.</p>`}</div>${importBox()}`;
+  document.querySelectorAll("[data-f]").forEach(b => b.onclick = () => { FILTER = b.dataset.f; drawAdmin(); });
+  $("#reload").onclick = renderAdmin;
+  document.querySelectorAll("[data-set]").forEach(b => b.onclick = async () => { b.disabled = true;
+    try { await updateDoc(doc(db, "users", b.dataset.u), { status: b.dataset.set }); USERS.find(u => u.uid === b.dataset.u).status = b.dataset.set; drawAdmin(); } catch (e) { b.disabled = false; b.textContent = "Erreur"; } });
+  wireImport();
+}
+
+/* ---------------- routeur ---------------- */
+function route() {
+  if (!USER) { renderPublic(); const h = location.hash.slice(1); if (h === "acces" || h === "programme") document.getElementById(h)?.scrollIntoView(); return; }
+  if (!(PROFILE?.status === "approved" || isAdmin())) return;
+  const h = (location.hash || "#accueil").slice(1);
+  if (h.startsWith("m-") && byId[h.slice(2)]) { renderSubject(byId[h.slice(2)], PENDING ?? 0); PENDING = null; window.scrollTo(0, 0); return; }
+  if (h === "emploi") return renderSchedule();
+  if (h === "admin" && isAdmin()) return renderAdmin();
+  renderHome(h === "programme" ? "programme" : null);
+}
+addEventListener("hashchange", route);
+async function boot(user) {
+  USER = user;
+  if (!user) { PROFILE = null; return route(); }
+  if (!user.emailVerified) return renderVerify();
+  try { await user.getIdToken(true); const s = await getDoc(doc(db, "users", user.uid)); PROFILE = s.exists() ? s.data() : null; } catch (e) { PROFILE = null; }
+  if (!isAdmin()) { if (!PROFILE || PROFILE.status === "pending") return renderPending(); if (PROFILE.status === "blocked") return renderBlocked(); }
+  try { const s = await getDoc(doc(db, "progress", user.uid)); P = s.exists() ? s.data() : { done: {}, quiz: {} }; P.done ||= {}; P.quiz ||= {}; } catch (e) { P = { done: {}, quiz: {} }; }
+  route();
+}
+onAuthStateChanged(auth, boot);
+
+</script>
+<script>
+setTimeout(function(){var a=document.getElementById("app");if(a&&a.querySelector(".boot")){a.innerHTML='<div style="max-width:520px;margin:60px auto;padding:24px;font-family:Manrope,system-ui,sans-serif;text-align:center"><h2 style="margin:0 0 10px">WebMaster Academy</h2><p style="color:#625D78">Le site se charge seulement depuis son adresse officielle :</p><p><a href="https://webmasteracademy-sn.github.io" style="color:#E6007E;font-weight:800">webmasteracademy-sn.github.io</a></p><p style="color:#625D78;font-size:14px">Vérifie aussi ta connexion Internet, puis recharge la page.</p></div>';}},9000);
+</script>
+</body>
+</html>
